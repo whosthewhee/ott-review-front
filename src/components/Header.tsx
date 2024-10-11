@@ -3,9 +3,9 @@
 const Header = () => {
   return (
     <>
-      <header className="flex justify-between items-center p-4 bg-gray-800 text-white">
+      <header className="flex justify-between items-center p-4 bg-[#000000]">
         <div>
-          <div className="text-xl font-bold">OTT Review</div>
+          <div className="text-xl font-bold text-[#E50914]">OTT Review</div>
         </div>
         <div className="items-center space-x-4">
           <input
