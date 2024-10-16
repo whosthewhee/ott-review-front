@@ -1,30 +1,41 @@
 import React from "react";
+import { Link } from "react-router-dom";
+import { produtionCompany } from "../types/Content";
 
 interface ContentCardProps {
+  _id: string;
   title: string;
   rating: number;
   imageUrl: string;
-  platform_nm: string;
-  category_nm: string;
+  platformName: string;
+  categoryName: string;
+  typeName: string;
+  produtionCompany: produtionCompany;
+  isRanking?: boolean;
 }
 
 const ContentCard: React.FC<ContentCardProps> = ({
+  _id,
   title,
   rating,
   imageUrl,
-  platform_nm,
-  category_nm,
+  platformName,
+  categoryName,
+  typeName,
+  produtionCompany,
+  isRanking,
 }) => {
   return (
-    <div className="border border-gray-300 rounded-lg shadow-md overflow-hidden w-52 text-center bg-[#ffffff]">
-      <img src={imageUrl} alt={title} className="w-full h-52 object-cover" />
-      <div className="p-4">
-        <h3 className="font-bold text-lg mb-2">{title}</h3>
-        <p className="text-sm text-gray-500">Platform: {platform_nm}</p>
-        <p className="text-sm text-gray-500">Category: {category_nm}</p>
-        <p className="text-sm text-yellow-500">Rating: {rating} / 5</p>
+    <Link to={`/content/${_id}`}>
+      {/* {isRanking && (<div>1</div>)} */}
+      <div className="rounded shadow-md overflow-hidden sm:w-40 lg:w-68 text-center">
+        <img
+          src={imageUrl}
+          alt={title}
+          className="w-full h-auto object-cover"
+        />
       </div>
-    </div>
+    </Link>
   );
 };
 

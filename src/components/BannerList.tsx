@@ -3,13 +3,14 @@ import { Content } from "../types/Content";
 import ContentCard from "./ContentCard";
 import { Swiper, SwiperClass, SwiperSlide } from "swiper/react";
 import { Pagination, Navigation, Autoplay } from "swiper/modules";
+import { Link } from "react-router-dom";
 
-type ContentListProps = {
+type BannerListProps = {
   contents: Content[];
   categoryName: string;
 };
 
-const ContentList = ({ contents, categoryName }: ContentListProps) => {
+const BannerList = ({ contents, categoryName }: BannerListProps) => {
   const serverUrl = process.env.REACT_APP_SERVER_DOMAIN || "";
 
   const filteredContents = contents.filter(
@@ -39,7 +40,7 @@ const ContentList = ({ contents, categoryName }: ContentListProps) => {
       <Swiper
         modules={[Navigation, Autoplay]} // 페이지네이션, 자동재생 등의 기능을 불러옴
         spaceBetween={50} // 슬라이더 간의 간격 지정
-        slidesPerView={4} // 한 슬라이더 당 보여져야하는 슬라이드 갯수
+        slidesPerView={1} // 한 슬라이더 당 보여져야하는 슬라이드 갯수
         // 슬라이더가 변경될 때 마다 특정 event를 받아올 수 있음
         // activeIndex는 현재 active되어 있는 슬라이더의 index를 의미함. animation추가할 때 필요함.
         // onSlideChange={(e: any) => {
@@ -52,12 +53,12 @@ const ContentList = ({ contents, categoryName }: ContentListProps) => {
         //   setSwiper(e);
         // }}
         navigation={true} // 네비게이션 활성화
-        // autoplay={{
-        //   // 자동 재생
-        //   delay: 5000, // 지연 시간 (한 슬라이더에 머물르는 시간)
-        //   disableOnInteraction: false, // 마우스 제어 이후 자동 재생을 막을지 말지
-        // }}
-        //speed={5000} // 슬라이더 넘어가는 속도
+        autoplay={{
+          // 자동 재생
+          delay: 500, // 지연 시간 (한 슬라이더에 머물르는 시간)
+          disableOnInteraction: false, // 마우스 제어 이후 자동 재생을 막을지 말지
+        }}
+        speed={5000} // 슬라이더 넘어가는 속도
         // pagination={{
         //   // 페이지네이션 활성화
         //   clickable: true, // 페이지네이션 버튼 클릭 가능하게 할지 말지
@@ -65,7 +66,15 @@ const ContentList = ({ contents, categoryName }: ContentListProps) => {
       >
         {filteredContents.map((content, index) => (
           <SwiperSlide key={content._id}>
-            <ContentCard {...content} />
+            <Link to={`/content/${content._id}`}>
+              <div className="rounded shadow-md overflow-hidden w-full h-[290px] text-center">
+                <img
+                  src={content.imageUrl}
+                  alt={content.title}
+                  className="w-full h-auto object-cover"
+                />
+              </div>
+            </Link>
           </SwiperSlide>
         ))}
       </Swiper>
@@ -73,4 +82,4 @@ const ContentList = ({ contents, categoryName }: ContentListProps) => {
   );
 };
 
-export default ContentList;
+export default BannerList;

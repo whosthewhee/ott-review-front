@@ -3,6 +3,14 @@ export interface Content {
   title: string;
   rating: number;
   imageUrl: string;
-  platform_nm: string;
-  category_nm: string;
+  platformName: string;
+  categoryName: string;
+  typeName: string;
+  produtionCompany: produtionCompany;
+}
+
+export interface produtionCompany {
+  name: string;
+  founded: number;
+  country: string;
 }

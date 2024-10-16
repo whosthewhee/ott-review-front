@@ -4,11 +4,28 @@ import ContentList from "../components/ContentList";
 import { Category } from "../types/Category";
 import axios from "axios";
 import { Content } from "../types/Content";
+import ContentListRanking from "../components/ContentListRanking";
+import BannerList from "../components/BannerList";
 
 const Home = () => {
   const serverUrl = process.env.REACT_APP_SERVER_DOMAIN || "";
   const [categories, setCategories] = useState<Category[]>([]);
   const [contents, setContents] = useState<Content[]>([]);
+
+  const sectionTitleName = (categoryName: string) => {
+    switch (categoryName) {
+      case "Movie":
+        return "급상승 영화";
+      case "Entertainment":
+        return "리얼리티 예능";
+      case "Drama":
+        return "가족 이야기를 담은 드라마";
+      case "Documentary":
+        return "다큐멘터리";
+      default:
+        return "기타";
+    }
+  };
 
   // 카테고리 목록 불러오기
   useEffect(() => {
@@ -21,7 +38,6 @@ const Home = () => {
         console.error("Error fetching contents:", error);
       });
   }, []);
-  console.log(categories);
 
   // 콘텐츠 목록 불러오기
   useEffect(() => {
@@ -49,40 +65,46 @@ const Home = () => {
   //   },
   // ];
 
+  console.log(contents);
+
   return (
     <div>
+      {/* 큰 홍보용 이미지 넣기 swiper */}
       <section className="p-8 bg-[#000000]">
-        <h2 className="text-2xl font-bold mb-4 text-[#FFFFFF]">
+        <div>
+          <BannerList contents={contents} categoryName="Entertainment" />
+        </div>
+      </section>
+
+      <section className="p-8 bg-[#000000]">
+        <h2 className="text-lg font-bold mb-4 text-[#FFFFFF]">오늘의 TOP20</h2>
+        <div>
+          <ContentListRanking contents={contents} />
+        </div>
+      </section>
+
+      <section className="p-8 bg-[#000000]">
+        <h2 className="text-lg font-bold mb-4 text-[#FFFFFF]">
           지금 방영 중인 인기 콘텐츠
         </h2>
         <div className="grid grid-cols-4 gap-6">
           {contents.map((content, index) => (
             <ContentCard key={content._id} {...content} />
           ))}
-          {/* <ContentList /> */}
-          {/* {recommendedContent.map((content, index) => (
-            <ContentCard key={index} {...content} />
-            <ContentList />
-          ))} */}
         </div>
       </section>
 
       {categories.map((category) => (
         <section key={category._id} className="p-8 bg-[#000000]">
-          <h2 className="text-2xl font-bold mb-4 text-[#FFFFFF]">
-            {category.name}
+          <h2 className="text-lg font-bold mb-4 text-[#FFFFFF]">
+            {sectionTitleName(category.name)}
           </h2>
-          <div className="grid grid-cols-3 gap-6">
-            {/* {contents[category].map((content, index) => (
-              <ContentCard key={index} {...content} />
-            ))} */}
-            {/* <ContentList /> */}
-
-            {contents
-              .filter((content) => content.category_nm === category.name)
-              .map((content, index) => (
-                <ContentCard key={index} {...content} />
-              ))}
+          <div key={category._id}>
+            <ContentList
+              key={category._id}
+              contents={contents}
+              categoryName={category.name}
+            />
           </div>
         </section>
       ))}
