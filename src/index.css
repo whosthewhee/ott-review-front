@@ -22,3 +22,64 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+/* swiper 스타일 적용 */
+/*네비게이션 이전, 다음 버튼 스타일 수정*/
+.swiper-button-prev-banner {
+  position: absolute;
+  top: 50%;
+  left: -4rem;
+  transform: translateY(-50%);
+  opacity: 0.5;
+  background-repeat: no-repeat;
+  background-size: 100%;
+  background-position: 50% 50%;
+  width: 1.333rem;
+  height: 100%;
+  font-size: 0px;
+  margin: 0px;
+  padding: 0px;
+  z-index: 10;
+  transition: opacity 0.1s;
+  cursor: pointer;
+
+  background-image: url(../src/assets/image/icon_slide_left.svg);
+}
+
+.swiper-button-next-banner {
+  position: absolute;
+  top: 50%;
+  right: -4rem;
+  transform: translateY(-50%);
+  opacity: 0.5;
+  background-repeat: no-repeat;
+  background-size: 100%;
+  background-position: 50% 50%;
+  width: 1.333rem;
+  height: 100%;
+  font-size: 0px;
+  margin: 0px;
+  padding: 0px;
+  z-index: 10;
+  transition: opacity 0.1s;
+  cursor: pointer;
+  background-image: url(../src/assets/image/icon_slide_right.svg);
+}
+.swiper-button-prev,
+.swiper-button-next {
+  color: #d9d9d9 !important;
+  opacity: 0.5 !important;
+}
+/*페이지네이션 위치 조정*/
+.swiper-pagination-fraction,
+.swiper-pagination-custom,
+.swiper-horizontal > .swiper-pagination-bullets,
+.swiper-pagination-bullets.swiper-pagination-horizontal {
+  left: inherit !important;
+  right: 0 !important;
+  width: inherit !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 30px 20px 0;
+}

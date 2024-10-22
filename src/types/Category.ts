@@ -3,4 +3,5 @@ export interface Category {
   name: string;
   createdDate: Date;
   updatedDate: Date;
+  viewName: string;
 }

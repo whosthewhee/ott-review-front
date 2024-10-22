@@ -26,7 +26,7 @@ const ContentCard: React.FC<ContentCardProps> = ({
   isRanking,
 }) => {
   return (
-    <Link to={`/content/${_id}`}>
+    <Link to={`/contents/${_id}`}>
       {/* {isRanking && (<div>1</div>)} */}
       <div className="rounded shadow-md overflow-hidden sm:w-40 lg:w-68 text-center">
         <img

@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 import ContentCard from "../components/ContentCard";
 import ContentList from "../components/ContentList";
 import { Category } from "../types/Category";
-import axios from "axios";
 import { Content } from "../types/Content";
+import axios from "axios";
 import ContentListRanking from "../components/ContentListRanking";
 import BannerList from "../components/BannerList";
 
@@ -50,39 +50,30 @@ const Home = () => {
         console.error("Error fetching contents:", error);
       });
   }, []);
-  // const recommendedContent: Content[] = [
-  //   {
-  //     title: "Stranger Things",
-  //     platform: "Netflix",
-  //     rating: 4.5,
-  //     imageUrl: "https://via.placeholder.com/150",
-  //   },
-  //   {
-  //     title: "The Mandalorian",
-  //     platform: "Disney+",
-  //     rating: 4.7,
-  //     imageUrl: "https://via.placeholder.com/150",
-  //   },
-  // ];
 
-  console.log(contents);
+  //오늘의 추천 컨텐츠 목록 (평점 4.0 이상)
+  const recommendedContents: Content[] = contents.filter(
+    (content) => content.rating >= 4.0
+  );
 
   return (
     <div>
-      {/* 큰 홍보용 이미지 넣기 swiper */}
+      {/* 배너 영역 */}
       <section className="p-8 bg-[#000000]">
         <div>
-          <BannerList contents={contents} categoryName="Entertainment" />
+          <BannerList />
         </div>
       </section>
 
+      {/* 오늘의 TOP20 영역 */}
       <section className="p-8 bg-[#000000]">
         <h2 className="text-lg font-bold mb-4 text-[#FFFFFF]">오늘의 TOP20</h2>
         <div>
-          <ContentListRanking contents={contents} />
+          <ContentListRanking contents={recommendedContents} />
         </div>
       </section>
 
+      {/* 지금 방영 중인 인기 콘텐츠 영역 */}
       <section className="p-8 bg-[#000000]">
         <h2 className="text-lg font-bold mb-4 text-[#FFFFFF]">
           지금 방영 중인 인기 콘텐츠
@@ -94,6 +85,7 @@ const Home = () => {
         </div>
       </section>
 
+      {/* 카테고리별 콘텐츠 영역 */}
       {categories.map((category) => (
         <section key={category._id} className="p-8 bg-[#000000]">
           <h2 className="text-lg font-bold mb-4 text-[#FFFFFF]">
