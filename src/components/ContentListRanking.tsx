@@ -2,18 +2,16 @@ import { useState } from "react";
 import { Content } from "../types/Content";
 import ContentCard from "./ContentCard";
 import { Swiper, SwiperClass, SwiperSlide } from "swiper/react";
-import { Pagination, Navigation, Autoplay } from "swiper/modules";
+import { Navigation } from "swiper/modules";
 
 type ContentListRankingProps = {
   contents: Content[];
 };
 
 const ContentListRanking = ({ contents }: ContentListRankingProps) => {
-  const serverUrl = process.env.REACT_APP_SERVER_DOMAIN || "";
-
   const [swiper, setSwiper] = useState<SwiperClass>();
-  const [isBeginning, setIsBeginning] = useState(true);
-  const [isEnd, setIsEnd] = useState(false);
+  // const [isBeginning, setIsBeginning] = useState(true);
+  // const [isEnd, setIsEnd] = useState(false);
 
   const handlePrev = () => {
     // 이전으로 이동
@@ -27,7 +25,7 @@ const ContentListRanking = ({ contents }: ContentListRankingProps) => {
 
   return (
     <Swiper
-      modules={[Navigation, Autoplay]} // 페이지네이션, 자동재생 등의 기능을 불러옴
+      modules={[Navigation]} // 페이지네이션, 자동재생 등의 기능을 불러옴
       spaceBetween={100} // 슬라이더 간의 간격 지정
       slidesPerView={4} // 한 슬라이더 당 보여져야하는 슬라이드 갯수
       // 슬라이더가 변경될 때 마다 특정 event를 받아올 수 있음
@@ -43,13 +41,7 @@ const ContentListRanking = ({ contents }: ContentListRankingProps) => {
       //   setSwiper(e);
       // }}
       navigation={false} // 네비게이션 활성화
-      //watchOverflow={true} // 슬라이드가 1개 일 때 pager, button 숨김 여부 설정
-      autoplay={{
-        // 자동 재생
-        delay: 500, // 지연 시간 (한 슬라이더에 머물르는 시간)
-        disableOnInteraction: false, // 마우스 제어 이후 자동 재생을 막을지 말지
-      }}
-      speed={5000} // 슬라이더 넘어가는 속도
+      watchOverflow={true} // 슬라이드가 1개 일 때 pager, button 숨김 여부 설정
       // pagination={{
       //   // 페이지네이션 활성화
       //   clickable: true, // 페이지네이션 버튼 클릭 가능하게 할지 말지

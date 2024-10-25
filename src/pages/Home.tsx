@@ -8,7 +8,7 @@ import ContentListRanking from "../components/ContentListRanking";
 import BannerList from "../components/BannerList";
 
 const Home = () => {
-  const serverUrl = process.env.REACT_APP_SERVER_DOMAIN || "";
+  //const serverUrl = process.env.REACT_APP_SERVER_DOMAIN || "";
   const [categories, setCategories] = useState<Category[]>([]);
   const [contents, setContents] = useState<Content[]>([]);
 
@@ -30,7 +30,7 @@ const Home = () => {
   // 카테고리 목록 불러오기
   useEffect(() => {
     axios
-      .get(`${serverUrl}/categories`)
+      .get(`${process.env.REACT_APP_SERVER_DOMAIN}/categories`)
       .then((response) => {
         setCategories(response.data);
       })
@@ -42,7 +42,7 @@ const Home = () => {
   // 콘텐츠 목록 불러오기
   useEffect(() => {
     axios
-      .get(`${serverUrl}/contents`)
+      .get(`${process.env.REACT_APP_SERVER_DOMAIN}/contents`)
       .then((response) => {
         setContents(response.data);
       })
@@ -55,6 +55,8 @@ const Home = () => {
   const recommendedContents: Content[] = contents.filter(
     (content) => content.rating >= 4.0
   );
+
+  console.log(contents);
 
   return (
     <div>

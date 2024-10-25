@@ -6,6 +6,7 @@ import Home from "./pages/Home";
 import PlatformPage from "./pages/PlatformPage";
 import ContentPage from "./pages/ContentPage";
 import CategoryPage from "./pages/CategoryPage";
+import CommentPage from "./pages/CommentPage";
 
 import "swiper/css";
 import "swiper/css/pagination";
@@ -19,6 +20,7 @@ function App() {
         <Route path="/platform/:platformId" element={<PlatformPage />} />
         <Route path="/category/:categoryId" element={<CategoryPage />} />
         <Route path="/contents/:contentId" element={<ContentPage />} />
+        <Route path="/comment/:commentId" element={<CommentPage />} />
       </Route>
     </Routes>
   );

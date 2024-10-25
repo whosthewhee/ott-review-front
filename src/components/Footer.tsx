@@ -1,7 +1,9 @@
 const Footer = () => {
   return (
     <footer>
-      <h2>This is Footer</h2>
+      <div className="p-8 bg-[#000000] text-[#FFFFFF]">
+        <h2>Footer 영역입니다.</h2>
+      </div>
     </footer>
   );
 };

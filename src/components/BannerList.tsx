@@ -51,6 +51,7 @@ const BannerList = () => {
           disableOnInteraction: false, // 마우스 제어 이후 자동 재생을 막을지 말지
         }}
         speed={1000} // 슬라이더 넘어가는 속도
+        watchOverflow={true} // 슬라이드가 1개 일 때 pager, button 숨김 여부 설정
         // 슬라이더가 변경될 때 마다 특정 event를 받아올 수 있음
         // activeIndex는 현재 active되어 있는 슬라이더의 index를 의미함. animation추가할 때 필요함.
         // onSlideChange={(e: any) => {
@@ -59,7 +60,6 @@ const BannerList = () => {
         //   // 마지막 슬라이더인지 아닌지 boolean 반환
         //   setIsEnd(e.isEnd);
         // }}
-
         // onSwiper={(swiper: SwiperCore) => {
         //   // Swiper의 navigation을 커스텀 버튼에 연결
         //   if (swiper && swiper.params.navigation) {
