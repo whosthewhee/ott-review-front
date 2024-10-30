@@ -3,11 +3,15 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Category } from "../types/Category";
+import { useAuthStore } from "../store/useAuthStore";
+import searchIcon from "../assets/images/icon_search.svg";
 
 const Header = () => {
+  const userInfo = useAuthStore((state) => state.user?.userinfo);
+
   const serverUrl = process.env.REACT_APP_SERVER_DOMAIN || "";
   const [categories, setCategories] = useState<Category[]>([]);
-
+  console.log(userInfo);
   // 카테고리 목록 불러오기
   useEffect(() => {
     axios
@@ -21,7 +25,7 @@ const Header = () => {
   }, []);
   return (
     <>
-      <header className="flex justify-between items-center p-4 bg-[#000000] text-[#D9D9D9] font-medium">
+      <header className="flex justify-between items-center p-4 bg-[#000000] text-[#D9D9D9] font-medium h-[102px]">
         <div className="flex items-center gap-x-5">
           <Link to={"/"}>
             <div className="flex items-center sm:w-[8.2rem] md:w-[10.5625rem] h-[4.333rem]">
@@ -48,10 +52,31 @@ const Header = () => {
             </Link>
           ))}
         </div>
-        <div className="flex items-end gap-x-3">
-          {/* 로그인 되어있으면 프로필 이미지, 안되어 있으면 로그인페이지로 이동/회원가입 버튼 노출*/}
-          <Link to={"/login"}>로그인</Link>
-          <Link to={"/register"}>회원가입</Link>
+        <div className="flex items-center gap-x-3">
+          {userInfo ? (
+            <div className="flex items-center gap-x-5">
+              <div>
+                <img
+                  src={searchIcon}
+                  alt="검색 아이콘"
+                  className="w-8 rounded-md"
+                />
+              </div>
+              <Link to={"/profile"}>
+                <img
+                  src={userInfo.imageUrl}
+                  alt="프로필 이미지"
+                  className="w-10 rounded-md"
+                />
+              </Link>
+              {/* <span>{userInfo.nickname}</span> */}
+            </div>
+          ) : (
+            <>
+              <Link to={"/login"}>로그인</Link>
+              <Link to={"/register"}>회원가입</Link>
+            </>
+          )}
         </div>
       </header>
     </>

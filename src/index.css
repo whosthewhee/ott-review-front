@@ -43,7 +43,7 @@ code {
   transition: opacity 0.1s;
   cursor: pointer;
 
-  background-image: url(../src/assets/image/icon_slide_left.svg);
+  background-image: url(../src/assets/images/icon_slide_left.svg);
 }
 
 .swiper-button-next-banner {
@@ -63,7 +63,7 @@ code {
   z-index: 10;
   transition: opacity 0.1s;
   cursor: pointer;
-  background-image: url(../src/assets/image/icon_slide_right.svg);
+  background-image: url(../src/assets/images/icon_slide_right.svg);
 }
 .swiper-button-prev,
 .swiper-button-next {

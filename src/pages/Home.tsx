@@ -56,8 +56,6 @@ const Home = () => {
     (content) => content.rating >= 4.0
   );
 
-  console.log(contents);
-
   return (
     <div>
       {/* 배너 영역 */}

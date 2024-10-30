@@ -47,7 +47,7 @@ const RegisterPage = () => {
       errorMessage = error.response.data.message;
     }
 
-    console.error("회원가입 중 오류가 발생했습니다.", error);
+    console.error(errorMessage, error);
     alert(errorMessage);
   };
 
@@ -72,7 +72,7 @@ const RegisterPage = () => {
   };
 
   return (
-    <section className="p-8 bg-[#000000] text-[#FFFFFF] flex flex-col items-center gap-y-10 px-60 pt-10">
+    <section className="min-h-screen p-8 bg-[#000000] text-[#FFFFFF] flex flex-col items-center gap-y-10 px-60 pt-10">
       <div>
         <h3 className="text-center text-2xl font-bold">회원가입</h3>
         <p>아이디와 이메일로 간편하게 시작하세요!</p>
