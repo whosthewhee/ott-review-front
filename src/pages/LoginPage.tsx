@@ -4,7 +4,6 @@ import { ChangeEvent, useState } from "react";
 import axios from "axios";
 import { useAuthStore } from "../store/useAuthStore";
 import { jwtDecode } from "jwt-decode";
-// import { useAuth } from "../hooks/useAuth";
 
 interface LoginFormProps {
   email: string;
@@ -73,9 +72,8 @@ const LoginPage = () => {
     }
   };
 
-  // const handleLogin = async (loginFormData : LoginFormProps) => {
+  // const handleLogin = async (loginFormData: LoginFormProps) => {
   //   await login(loginFormData);
-
   // };
 
   return (

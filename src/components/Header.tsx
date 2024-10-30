@@ -12,7 +12,7 @@ const Header = () => {
 
   const serverUrl = process.env.REACT_APP_SERVER_DOMAIN || "";
   const [categories, setCategories] = useState<Category[]>([]);
-  console.log(userInfo);
+
   // 카테고리 목록 불러오기
   useEffect(() => {
     axios
@@ -24,6 +24,7 @@ const Header = () => {
         console.error("Error fetching contents:", error);
       });
   }, []);
+
   return (
     <>
       <header className="flex justify-between items-center p-4 bg-[#000000] text-[#D9D9D9] font-medium h-[102px]">
@@ -63,7 +64,7 @@ const Header = () => {
                   className="w-8 rounded-md"
                 />
               </div>
-              <Link to={"/profile"}>
+              <Link to={"/userInfo"}>
                 <img
                   src={userInfo.imageUrl}
                   alt="프로필 이미지"

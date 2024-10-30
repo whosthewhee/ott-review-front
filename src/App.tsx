@@ -13,6 +13,7 @@ import CommentPage from "./pages/CommentPage";
 import RegisterPage from "./pages/RegisterPage";
 import LoginPage from "./pages/LoginPage";
 // import LoginPage from "@pages/LoginPage";
+import UserInfoPage from "./pages/UserInfoPage";
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
         <Route path="/comment/:commentId" element={<CommentPage />} />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/login" element={<LoginPage />} />
+        <Route path="/userInfo" element={<UserInfoPage />} />
       </Route>
     </Routes>
   );
