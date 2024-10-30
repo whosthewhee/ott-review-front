@@ -1,6 +1,7 @@
 import { useParams } from "react-router-dom";
 
 const PlatformPage = () => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { contentId } = useParams();
 
   return (

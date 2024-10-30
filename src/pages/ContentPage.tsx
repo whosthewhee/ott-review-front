@@ -4,8 +4,10 @@ import { useParams } from "react-router-dom";
 import { Review } from "../types/Review";
 
 const ContentPage = () => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { contentId } = useParams();
   const serverUrl = process.env.REACT_APP_SERVER_DOMAIN || "";
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [reviews, setReviews] = useState<Review[]>([]);
 
   // 리뷰 목록 불러오기
@@ -18,6 +20,7 @@ const ContentPage = () => {
       .catch((error) => {
         console.error("Error fetching contents:", error);
       });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

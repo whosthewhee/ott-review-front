@@ -1,7 +1,8 @@
 import { useParams } from "react-router-dom";
-import Editor from "../components/QuillEditor";
+// import Editor from "../components/QuillEditor";
 
 const CommentPage = () => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { commentId } = useParams();
 
   return (

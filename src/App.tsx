@@ -12,6 +12,7 @@ import CategoryPage from "./pages/CategoryPage";
 import CommentPage from "./pages/CommentPage";
 import RegisterPage from "./pages/RegisterPage";
 import LoginPage from "./pages/LoginPage";
+// import LoginPage from "@pages/LoginPage";
 
 function App() {
   return (

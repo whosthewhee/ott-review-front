@@ -14,7 +14,7 @@ interface LoginFormProps {
 const LoginPage = () => {
   const serverUrl = process.env.REACT_APP_SERVER_DOMAIN || "";
   const navigate = useNavigate();
-  const { user, setLoggedIn, setLoggedOut } = useAuthStore((state) => state);
+  const { setLoggedIn } = useAuthStore((state) => state);
 
   const [loginFormData, setLoginFormData] = useState<LoginFormProps>({
     email: "",

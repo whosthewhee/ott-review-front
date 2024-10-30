@@ -1,6 +1,7 @@
 import { useParams } from "react-router-dom";
 
 const CategoryPage = () => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { categoryId } = useParams();
 
   return (

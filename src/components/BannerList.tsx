@@ -1,17 +1,11 @@
+/*eslint-disable*/
 import { useEffect, useRef, useState } from "react";
-import { Content } from "../types/Content";
-import ContentCard from "./ContentCard";
 import { Swiper, SwiperClass, SwiperSlide } from "swiper/react";
 import { Pagination, Navigation, Autoplay } from "swiper/modules";
 import SwiperCore from "swiper";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { BannerContent } from "../types/BannerContent";
-
-// type BannerListProps = {
-//   contents: Content[];
-//   categoryName: string;
-// };
 
 const BannerList = () => {
   const serverUrl = process.env.REACT_APP_SERVER_DOMAIN || "";
@@ -36,6 +30,7 @@ const BannerList = () => {
       .catch((error) => {
         console.error("Error fetching contents:", error);
       });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

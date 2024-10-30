@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Category } from "../types/Category";
 import { useAuthStore } from "../store/useAuthStore";
+// import searchIcon from "@images/icon-search.svg";
 import searchIcon from "../assets/images/icon_search.svg";
 
 const Header = () => {

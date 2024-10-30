@@ -63,6 +63,7 @@ const RegisterPage = () => {
     const { passwordConfirm, ...submitData } = registerFormData;
 
     try {
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const response = await axios.post(`${serverUrl}/users`, submitData);
       alert("회원가입이 완료되었습니다!");
       navigate("/login");

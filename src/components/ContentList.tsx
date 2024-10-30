@@ -1,3 +1,4 @@
+/*eslint-disable*/
 import { useState } from "react";
 import { Content } from "../types/Content";
 import ContentCard from "./ContentCard";
