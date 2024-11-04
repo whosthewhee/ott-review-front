@@ -45,25 +45,21 @@ const LoginPage = () => {
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
+    // await login(loginFormData);
     try {
-      const response = await axios.post(
+      const { status, data } = await axios.post(
         `${serverUrl}/login`,
         loginFormData,
         { withCredentials: true } // 쿠키 전송을 위한 옵션
       );
 
-      if (response.status === 201) {
-        const { accessToken } = response.data;
+      if (status === 200) {
+        alert("로그인에 성공했습니다.");
 
-        // 토큰을 로컬 스토리지에 저장
-        localStorage.setItem("token", accessToken);
+        console.log("data:", data);
 
-        // JWT 토큰 디코딩
-        const decodedToken: User = jwtDecode(accessToken);
-        //console.log("Decoded Token:", decodedToken);
-
-        // 로그인 상태 설정
-        setLoggedIn(decodedToken);
+        // setLoggedIn({ memberId, email, name, roles, expiresAt });
+        setLoggedIn(data);
 
         navigate("/");
       }
@@ -71,6 +67,36 @@ const LoginPage = () => {
       handleError(error);
     }
   };
+
+  // const handleLogin = async (e: React.FormEvent) => {
+  //   e.preventDefault();
+  //   // await login(loginFormData);
+  //   try {
+  //     const response = await axios.post(
+  //       `${serverUrl}/login`,
+  //       loginFormData,
+  //       { withCredentials: true } // 쿠키 전송을 위한 옵션
+  //     );
+
+  //     if (response.status === 201) {
+  //       const { accessToken } = response.data;
+
+  //       // 토큰을 로컬 스토리지에 저장
+  //       localStorage.setItem("token", accessToken);
+
+  //       // JWT 토큰 디코딩
+  //       const decodedToken: User = jwtDecode(accessToken);
+  //       //console.log("Decoded Token:", decodedToken);
+
+  //       // 로그인 상태 설정
+  //       setLoggedIn(decodedToken);
+
+  //       navigate("/");
+  //     }
+  //   } catch (error: any) {
+  //     handleError(error);
+  //   }
+  // };
 
   // const handleLogin = async (loginFormData: LoginFormProps) => {
   //   await login(loginFormData);

@@ -9,7 +9,6 @@ import searchIcon from "../assets/images/icon_search.svg";
 
 const Header = () => {
   const userInfo = useAuthStore((state) => state.user?.userinfo);
-
   const serverUrl = process.env.REACT_APP_SERVER_DOMAIN || "";
   const [categories, setCategories] = useState<Category[]>([]);
 
@@ -54,7 +53,7 @@ const Header = () => {
             </Link>
           ))}
         </div>
-        <div className="flex items-center gap-x-3">
+        <div className="flex items-center gap-x-4">
           {userInfo ? (
             <div className="flex items-center gap-x-5">
               <div>

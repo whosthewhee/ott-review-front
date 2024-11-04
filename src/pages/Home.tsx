@@ -8,7 +8,6 @@ import ContentListRanking from "../components/ContentListRanking";
 import BannerList from "../components/BannerList";
 
 const Home = () => {
-  //const serverUrl = process.env.REACT_APP_SERVER_DOMAIN || "";
   const [categories, setCategories] = useState<Category[]>([]);
   const [contents, setContents] = useState<Content[]>([]);
 

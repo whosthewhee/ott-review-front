@@ -98,7 +98,7 @@ const ContentPage = () => {
         {/* 리뷰 영역 */}
         <section>
           <div className="flex gap-x-2 items-center">
-            <span className="text-lg font-bold text-[#FFFFFF]">코멘트</span>
+            <span className="text-lg font-bold text-[#FFFFFF]">리뷰</span>
             <span className="text-[#D9D9D9] text-sm">150 +</span>
           </div>
           <div className="h-[255px]"></div>
