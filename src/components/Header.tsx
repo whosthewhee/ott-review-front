@@ -9,7 +9,7 @@ import searchIcon from "../assets/images/icon_search.svg";
 
 const Header = () => {
   const userInfo = useAuthStore((state) => state.user?.userinfo);
-  const serverUrl = process.env.REACT_APP_SERVER_DOMAIN || "";
+  const serverUrl = import.meta.env.VITE_SERVER_DOMAIN || "";
   const [categories, setCategories] = useState<Category[]>([]);
 
   // 카테고리 목록 불러오기

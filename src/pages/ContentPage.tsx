@@ -6,7 +6,7 @@ import { Review } from "../types/Review";
 const ContentPage = () => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { contentId } = useParams();
-  const serverUrl = process.env.REACT_APP_SERVER_DOMAIN || "";
+  const serverUrl = import.meta.env.VITE_SERVER_DOMAIN || "";
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [reviews, setReviews] = useState<Review[]>([]);
 

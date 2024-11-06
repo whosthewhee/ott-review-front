@@ -11,7 +11,7 @@ interface LoginFormProps {
 }
 
 const LoginPage = () => {
-  const serverUrl = process.env.REACT_APP_SERVER_DOMAIN || "";
+  const serverUrl = import.meta.env.VITE_SERVER_DOMAIN || "";
   const navigate = useNavigate();
   const { setLoggedIn } = useAuthStore((state) => state);
 

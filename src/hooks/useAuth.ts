@@ -10,7 +10,7 @@ interface LoginFormProps {
 }
 
 export const useAuth = () => {
-  const serverUrl = process.env.REACT_APP_SERVER_DOMAIN || "";
+  const serverUrl = import.meta.env.VITE_SERVER_DOMAIN || "";
   const navigate = useNavigate();
   const { user, setLoggedIn, setLoggedOut } = useAuthStore((state) => state);
 

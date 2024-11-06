@@ -11,7 +11,7 @@ type ContentListProps = {
 };
 
 const ContentList = ({ contents, categoryName }: ContentListProps) => {
-  const serverUrl = process.env.REACT_APP_SERVER_DOMAIN || "";
+  const serverUrl = import.meta.env.VITE_SERVER_DOMAIN || "";
 
   const filteredContents = contents.filter(
     (content) => content.categoryName === categoryName

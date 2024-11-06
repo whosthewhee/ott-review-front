@@ -8,7 +8,7 @@ import axios from "axios";
 import { BannerContent } from "../types/BannerContent";
 
 const BannerList = () => {
-  const serverUrl = process.env.REACT_APP_SERVER_DOMAIN || "";
+  const serverUrl = import.meta.env.VITE_SERVER_DOMAIN || "";
   const [bannerContents, setBannerContents] = useState<BannerContent[]>([]);
 
   const [swiper, setSwiper] = useState<SwiperClass>();

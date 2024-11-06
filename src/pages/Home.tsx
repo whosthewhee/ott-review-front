@@ -29,7 +29,7 @@ const Home = () => {
   // 카테고리 목록 불러오기
   useEffect(() => {
     axios
-      .get(`${process.env.REACT_APP_SERVER_DOMAIN}/categories`)
+      .get(`${import.meta.env.VITE_SERVER_DOMAIN}/categories`)
       .then((response) => {
         setCategories(response.data);
       })
@@ -41,7 +41,7 @@ const Home = () => {
   // 콘텐츠 목록 불러오기
   useEffect(() => {
     axios
-      .get(`${process.env.REACT_APP_SERVER_DOMAIN}/contents`)
+      .get(`${import.meta.env.VITE_SERVER_DOMAIN}/contents`)
       .then((response) => {
         setContents(response.data);
       })
