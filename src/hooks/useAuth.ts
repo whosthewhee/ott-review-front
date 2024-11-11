@@ -1,14 +1,7 @@
 import { useAuthStore } from "@/store/useAuthStore";
-import { User } from "@/types/User";
 import axios from "axios";
-import { jwtDecode } from "jwt-decode";
 import { useNavigate } from "react-router-dom";
-import { getCookie, setCookie } from "@/libs/react-cookie";
-
-interface LoginFormProps {
-  email: string;
-  password: string;
-}
+import { setCookie } from "@/libs/react-cookie";
 
 export const useAuth = () => {
   const serverUrl = import.meta.env.VITE_SERVER_DOMAIN || "";
