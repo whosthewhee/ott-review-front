@@ -4,30 +4,27 @@ import { User } from "../types/User";
 
 interface AuthStore {
   user: User | null;
+  accessToken: string | null;
 }
 
 interface AuthAction {
-  setLoggedIn: (user: User) => void;
+  setLoggedIn: (user: User, accessToken: string) => void;
   setLoggedOut: () => void;
 }
 
 export const useAuthStore = create(
-  persist<AuthStore & AuthAction>(
+  //상태를 생성
+  persist<AuthStore & AuthAction>( //상태를 로컬스토리지에 저장 및 불러오기
     (set, get) => ({
       user: null,
-      setLoggedIn: (user: User) => set({ user }),
+      accessToken: null,
+      setLoggedIn: (user: User, accessToken: string) =>
+        set({ user, accessToken }),
       setLoggedOut: () => set({ user: null }),
     }),
-    // 코파일럿에 해당 소스코드 물어보기
     {
       name: "auth-storage",
-      storage: createJSONStorage(() => localStorage),
+      storage: createJSONStorage(() => localStorage), //상태를 저장할 스토리지 지정
     }
   )
 );
-
-// export const useAuthStore = create<AuthStore & AuthAction>((set) => ({
-//   user: null,
-//   setLoggedIn: (user: User) => set({ user }),
-//   setLoggedOut: () => set({ user: null }),
-// }));

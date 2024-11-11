@@ -3,6 +3,7 @@ import { User } from "@/types/User";
 import axios from "axios";
 import { jwtDecode } from "jwt-decode";
 import { useNavigate } from "react-router-dom";
+import { getCookie, setCookie } from "@/libs/react-cookie";
 
 interface LoginFormProps {
   email: string;
@@ -29,33 +30,28 @@ export const useAuth = () => {
     alert(errorMessage);
   };
 
-  // const login = async (
-  //   email: string,
-  //   password: string,
-  //   navigateTarget: string = "/"
-  // )
-  const login = async (loginFormData: LoginFormProps) => {
+  const login = async (
+    email: string,
+    password: string,
+    navigateTarget: string = "/"
+  ) => {
     try {
-      const response = await axios.post(
+      const { status, data } = await axios.post(
         `${serverUrl}/login`,
-        loginFormData,
-        { withCredentials: true } // 쿠키 전송을 위한 옵션
+        { email, password },
+        { withCredentials: true }
+        // withCredentials 옵션 : 서로 다른 도메인에 요청을 보낼 때 요청에 credential정보를 담아서 보낼지 결정
+        // => 보내려는 요청에 쿠키가 첨부되거나 헤더에 Authorization항목이 있을 경우 true로 설정해야함
       );
 
-      if (response.status === 201) {
-        const { accessToken } = response.data;
+      if (status === 201) {
+        alert("로그인에 성공했습니다.");
 
-        // 토큰을 로컬 스토리지에 저장
-        localStorage.setItem("token", accessToken);
+        console.log("data:", data);
+        setCookie("accessToken", data.token);
+        setLoggedIn(data, data.token);
 
-        // JWT 토큰 디코딩
-        const decodedToken: User = jwtDecode(accessToken);
-        //console.log("Decoded Token:", decodedToken);
-
-        // 로그인 상태 설정
-        setLoggedIn(decodedToken);
-
-        navigate("/");
+        navigate(navigateTarget);
       }
     } catch (error: any) {
       loginError(error);
@@ -63,14 +59,8 @@ export const useAuth = () => {
   };
 
   const logout = async () => {
-    // try {
-    //   await axiosInstance.delete("/api/Token");
-    // } catch (error) {
-    //   console.log("Error during logout");
-    // } finally {
     setLoggedOut();
-    navigate("/");
-    // }
+    navigate("/login");
   };
 
   return {

@@ -6,7 +6,7 @@ export interface User {
   password?: string;
   isDeleted?: boolean;
   //내장 도큐먼트
-  userinfo?: userInfo; // 선택적으로 userinfo 포함
+  userinfo: userInfo; // 선택적으로 userinfo 포함
 }
 
 export interface userInfo {

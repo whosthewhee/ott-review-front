@@ -1,15 +1,18 @@
 import { useEffect, useState } from "react";
-import ContentCard from "../components/ContentCard";
-import ContentList from "../components/ContentList";
+import ContentCard from "@/components/ContentCard";
+import ContentList from "@/components/ContentList";
 import { Category } from "../types/Category";
 import { Content } from "../types/Content";
 import axios from "axios";
-import ContentListRanking from "../components/ContentListRanking";
-import BannerList from "../components/BannerList";
+import ContentListRanking from "@/components/ContentListRanking";
+import BannerList from "@/components/BannerList";
+import { getCookie } from "@/libs/react-cookie";
 
 const Home = () => {
+  const serverUrl = import.meta.env.VITE_SERVER_DOMAIN || "";
   const [categories, setCategories] = useState<Category[]>([]);
   const [contents, setContents] = useState<Content[]>([]);
+  const accessToken = getCookie("accessToken"); // 쿠키에서 토큰 가져오기
 
   const sectionTitleName = (categoryName: string) => {
     switch (categoryName) {
@@ -26,10 +29,21 @@ const Home = () => {
     }
   };
 
+  //지금 방영 중인 인기 콘텐츠 목록 (평점 낮은 순=>차후 수정)
+  const nowPopularContents: Content[] = contents
+    .filter((content) => content.rating >= 0)
+    .sort((a, b) => a.rating - b.rating)
+    .slice(0, 5);
+
+  //오늘의 추천 컨텐츠 목록 (평점 4.0 이상)
+  const recommendedContents: Content[] = contents.filter(
+    (content) => content.rating >= 4.0
+  );
+
   // 카테고리 목록 불러오기
   useEffect(() => {
     axios
-      .get(`${import.meta.env.VITE_SERVER_DOMAIN}/categories`)
+      .get(`${serverUrl}/categories`)
       .then((response) => {
         setCategories(response.data);
       })
@@ -41,7 +55,11 @@ const Home = () => {
   // 콘텐츠 목록 불러오기
   useEffect(() => {
     axios
-      .get(`${import.meta.env.VITE_SERVER_DOMAIN}/contents`)
+      .get(`${serverUrl}/contents`, {
+        headers: {
+          Authorization: `Bearer ${accessToken}`, // 요청 헤더에 토큰 추가
+        },
+      })
       .then((response) => {
         setContents(response.data);
       })
@@ -49,11 +67,6 @@ const Home = () => {
         console.error("Error fetching contents:", error);
       });
   }, []);
-
-  //오늘의 추천 컨텐츠 목록 (평점 4.0 이상)
-  const recommendedContents: Content[] = contents.filter(
-    (content) => content.rating >= 4.0
-  );
 
   return (
     <div>
@@ -77,8 +90,8 @@ const Home = () => {
         <h2 className="text-lg font-bold mb-4 text-[#FFFFFF]">
           지금 방영 중인 인기 콘텐츠
         </h2>
-        <div className="grid grid-cols-4 gap-6">
-          {contents.map((content, index) => (
+        <div className="grid grid-cols-5 gap-6">
+          {nowPopularContents.map((content, index) => (
             <ContentCard key={content._id} {...content} />
           ))}
         </div>

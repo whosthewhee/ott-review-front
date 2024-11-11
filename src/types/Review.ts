@@ -2,6 +2,7 @@ import { Content } from "./Content";
 import { User } from "./User";
 
 export interface Review {
+  _id: string;
   rating: number;
   content: string;
   seq: number;

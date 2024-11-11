@@ -1,16 +1,30 @@
 /* eslint-disable */
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { Category } from "../types/Category";
 import { useAuthStore } from "../store/useAuthStore";
-// import searchIcon from "@images/icon-search.svg";
 import searchIcon from "../assets/images/icon_search.svg";
 
 const Header = () => {
   const userInfo = useAuthStore((state) => state.user?.userinfo);
   const serverUrl = import.meta.env.VITE_SERVER_DOMAIN || "";
   const [categories, setCategories] = useState<Category[]>([]);
+
+  /* 프로필이미지 버튼 클릭시 [로그아웃/마이페이지]버튼 나오도록 처리하는 부분 */
+  const [isMoreButtonOpen, setIsMoreButtonOpen] = useState(false);
+
+  const handleMoreButtonToggle = () => {
+    setIsMoreButtonOpen((prevValue) => !prevValue);
+  };
+
+  const optionsRef = useRef<HTMLDivElement>(null);
+  const handleMoreButtonClose = (e: React.FocusEvent<HTMLButtonElement>) => {
+    if (!optionsRef.current?.contains(e.relatedTarget)) {
+      setIsMoreButtonOpen(false);
+    }
+  };
+  /*-------------------------------------------------------------*/
 
   // 카테고리 목록 불러오기
   useEffect(() => {
@@ -63,13 +77,31 @@ const Header = () => {
                   className="w-8 rounded-md"
                 />
               </div>
-              <Link to={"/userInfo"}>
-                <img
-                  src={userInfo.imageUrl}
-                  alt="프로필 이미지"
-                  className="w-10 rounded-md"
-                />
-              </Link>
+              <div>
+                <button
+                  onClick={handleMoreButtonToggle}
+                  onBlur={handleMoreButtonClose}
+                >
+                  <img
+                    src={userInfo.imageUrl}
+                    alt="프로필 이미지"
+                    className="w-10 rounded-md"
+                  />
+                </button>
+                {isMoreButtonOpen && (
+                  <>
+                    <div
+                      ref={optionsRef}
+                      className="absolute right-4 z-10 flex w-[95px] flex-col gap-1 rounded-md border border-[#0000004d] bg-[#FFFFFF] p-2 text-[14px] font-medium text-[#33393F] shadow-md"
+                    >
+                      <Link to={"/userInfo"}>마이페이지</Link>
+                      <Link to={"/logout"} className="hover:text-[#33393F]">
+                        로그아웃
+                      </Link>
+                    </div>
+                  </>
+                )}
+              </div>
               {/* <span>{userInfo.nickname}</span> */}
             </div>
           ) : (

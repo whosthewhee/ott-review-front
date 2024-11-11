@@ -2,6 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Review } from "../types/Review";
+import ReviewList from "../components/Review/ReviewList";
 
 const ContentPage = () => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -94,14 +95,41 @@ const ContentPage = () => {
       </article>
 
       {/* 하단 컨텐츠 부분 */}
-      <section className="p-8 bg-[#000000]">
-        {/* 리뷰 영역 */}
-        <section>
-          <div className="flex gap-x-2 items-center">
-            <span className="text-lg font-bold text-[#FFFFFF]">리뷰</span>
-            <span className="text-[#D9D9D9] text-sm">150 +</span>
+      <section className="grid p-8 bg-[#000000] gap-y-8">
+        {/* 리뷰 작성 영역 */}
+        <section className="grid gap-y-2">
+          <div className="items-center">
+            <span className="text-lg font-bold text-[#FFFFFF]">리뷰 작성</span>
           </div>
-          <div className="h-[255px]"></div>
+          <div className="text-[#FFFFFF]">
+            <form className="grid grid-cols-2 gap-y-2">
+              <div className="col-span-2">
+                <label htmlFor="rating">평점</label>
+                <input type="number" id="rating" name="rating" />
+              </div>
+              <div>
+                <label htmlFor="content">리뷰 내용</label>
+                <textarea id="content" name="content"></textarea>
+              </div>
+              <button type="submit" className="p-4 bg-[#4e4e4e] w-30">
+                리뷰 작성
+              </button>
+            </form>
+          </div>
+        </section>
+        {/* 리뷰 리스트 영역 */}
+        <section className="grid gap-y-2">
+          <div className="flex justify-between">
+            <div className="flex gap-x-2 items-center">
+              <span className="text-lg font-bold text-[#FFFFFF]">리뷰</span>
+              <span className="text-[#D9D9D9] text-sm">150 +</span>
+            </div>
+            <span className="text-[#D9D9D9] text-sm">더보기</span>
+          </div>
+          <div className="">
+            {/* 리뷰 리스트 영역 h-[255px] */}
+            {reviews.length !== 0 && <ReviewList reviews={reviews} />}
+          </div>
         </section>
 
         {/* 비슷한 콘텐츠 */}
