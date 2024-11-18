@@ -1,4 +1,4 @@
-import axios from "axios";
+import axiosInstance from "@/libs/axios";
 import { ChangeEvent, FormEvent, useState } from "react";
 import { User, userInfo } from "../types/User";
 import { useNavigate } from "react-router-dom";
@@ -8,7 +8,6 @@ interface RegisterFormProps extends User {
 }
 
 const RegisterPage = () => {
-  const serverUrl = import.meta.env.VITE_SERVER_DOMAIN || "";
   const navigate = useNavigate();
 
   const [registerFormData, setRegisterFormData] = useState<RegisterFormProps>({
@@ -64,7 +63,7 @@ const RegisterPage = () => {
 
     try {
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      const response = await axios.post(`${serverUrl}/users`, submitData);
+      const response = await axiosInstance.post(`/users`, submitData);
       alert("회원가입이 완료되었습니다!");
       navigate("/login");
     } catch (error: any) {

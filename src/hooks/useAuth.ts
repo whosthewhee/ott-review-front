@@ -1,10 +1,9 @@
 import { useAuthStore } from "@/store/useAuthStore";
-import axios from "axios";
+import axiosInstance from "@/libs/axios";
 import { useNavigate } from "react-router-dom";
 import { setCookie } from "@/libs/react-cookie";
 
 export const useAuth = () => {
-  const serverUrl = import.meta.env.VITE_SERVER_DOMAIN || "";
   const navigate = useNavigate();
   const { user, setLoggedIn, setLoggedOut } = useAuthStore((state) => state);
 
@@ -29,13 +28,10 @@ export const useAuth = () => {
     navigateTarget: string = "/"
   ) => {
     try {
-      const { status, data } = await axios.post(
-        `${serverUrl}/login`,
-        { email, password },
-        { withCredentials: true }
-        // withCredentials 옵션 : 서로 다른 도메인에 요청을 보낼 때 요청에 credential정보를 담아서 보낼지 결정
-        // => 보내려는 요청에 쿠키가 첨부되거나 헤더에 Authorization항목이 있을 경우 true로 설정해야함
-      );
+      const { status, data } = await axiosInstance.post(`/login`, {
+        email,
+        password,
+      });
 
       if (status === 201) {
         alert("로그인에 성공했습니다.");

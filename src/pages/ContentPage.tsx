@@ -1,4 +1,4 @@
-import axios from "axios";
+import axiosInstance from "@/libs/axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Review } from "../types/Review";
@@ -7,14 +7,13 @@ import ReviewList from "../components/Review/ReviewList";
 const ContentPage = () => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { contentId } = useParams();
-  const serverUrl = import.meta.env.VITE_SERVER_DOMAIN || "";
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [reviews, setReviews] = useState<Review[]>([]);
 
   // 리뷰 목록 불러오기
   useEffect(() => {
-    axios
-      .get(`${serverUrl}/reviews`)
+    axiosInstance
+      .get(`/reviews`)
       .then((response) => {
         setReviews(response.data);
       })

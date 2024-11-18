@@ -1,5 +1,5 @@
 /* eslint-disable */
-import axios from "axios";
+import axiosInstance from "@/libs/axios";
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { Category } from "../types/Category";
@@ -8,7 +8,6 @@ import searchIcon from "../assets/images/icon_search.svg";
 
 const Header = () => {
   const userInfo = useAuthStore((state) => state.user?.userinfo);
-  const serverUrl = import.meta.env.VITE_SERVER_DOMAIN || "";
   const [categories, setCategories] = useState<Category[]>([]);
 
   /* 프로필이미지 버튼 클릭시 [로그아웃/마이페이지]버튼 나오도록 처리하는 부분 */
@@ -28,8 +27,8 @@ const Header = () => {
 
   // 카테고리 목록 불러오기
   useEffect(() => {
-    axios
-      .get(`${serverUrl}/categories`)
+    axiosInstance
+      .get(`/categories`)
       .then((response) => {
         setCategories(response.data);
       })

@@ -4,11 +4,10 @@ import { Swiper, SwiperClass, SwiperSlide } from "swiper/react";
 import { Pagination, Navigation, Autoplay } from "swiper/modules";
 import SwiperCore from "swiper";
 import { Link } from "react-router-dom";
-import axios from "axios";
 import { BannerContent } from "../types/BannerContent";
+import axiosInstance from "@/libs/axios";
 
 const BannerList = () => {
-  const serverUrl = import.meta.env.VITE_SERVER_DOMAIN || "";
   const [bannerContents, setBannerContents] = useState<BannerContent[]>([]);
 
   const [swiper, setSwiper] = useState<SwiperClass>();
@@ -22,8 +21,8 @@ const BannerList = () => {
   // 배너 목록 불러오기
   useEffect(() => {
     SwiperCore.use([Navigation]);
-    axios
-      .get(`${serverUrl}/bannercontents`)
+    axiosInstance
+      .get(`/bannercontents`)
       .then((response) => {
         setBannerContents(response.data);
       })

@@ -3,13 +3,12 @@ import ContentCard from "@/components/ContentCard";
 import ContentList from "@/components/ContentList";
 import { Category } from "../types/Category";
 import { Content } from "../types/Content";
-import axios from "axios";
+import axiosInstance from "@/libs/axios";
 import ContentListRanking from "@/components/ContentListRanking";
 import BannerList from "@/components/BannerList";
 import { getCookie } from "@/libs/react-cookie";
 
 const Home = () => {
-  const serverUrl = import.meta.env.VITE_SERVER_DOMAIN || "";
   const [categories, setCategories] = useState<Category[]>([]);
   const [contents, setContents] = useState<Content[]>([]);
   const accessToken = getCookie("accessToken"); // 쿠키에서 토큰 가져오기
@@ -42,8 +41,8 @@ const Home = () => {
 
   // 카테고리 목록 불러오기
   useEffect(() => {
-    axios
-      .get(`${serverUrl}/categories`)
+    axiosInstance
+      .get(`/categories`)
       .then((response) => {
         setCategories(response.data);
       })
@@ -54,12 +53,8 @@ const Home = () => {
 
   // 콘텐츠 목록 불러오기
   useEffect(() => {
-    axios
-      .get(`${serverUrl}/contents`, {
-        headers: {
-          Authorization: `Bearer ${accessToken}`, // 요청 헤더에 토큰 추가
-        },
-      })
+    axiosInstance
+      .get(`/contents`)
       .then((response) => {
         setContents(response.data);
       })
